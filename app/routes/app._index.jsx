@@ -33,76 +33,39 @@ export default function Index() {
 
   return (
     <s-page>
-      {/* ... (return bloğunun geri kalanı olduğu gibi kalır) ... */}
-      <s-layout-block>
-        <s-flex justify="space-between" align="center">
-          <s-heading element="h1">Welcome back 👋</s-heading>
-          <s-flex gap="3">
-            <s-button>Open Support</s-button>
-            <s-button variant="primary">Start Designing</s-button>
-          </s-flex>
-        </s-flex>
-      </s-layout-block>
+      <s-section heading="Company Profile" padding="base">
+        <s-paragraph>This is your main company record. Each website can override its fields.</s-paragraph>
+        <s-divider class="custom-space" />
+        <s-form
+          onSubmit={(event) => {
+            event.waitUntil(fetch('app:save/data'));
 
-      <s-layout-block>
-        <s-card>
-          <s-card-header>
-            <s-flex justify="space-between" align="center">
-              <s-heading>Performance (All Orders)</s-heading>
-              <s-button-group>
-                <s-button pressed>7d</s-button>
-                <s-button>30d</s-button>
-                <s-button>90d</s-button>
-              </s-button-group>
-            </s-flex>
-          </s-card-header>
+          }}
+          onReset={() => console.log('automatically reset values')}
+        >
+          <s-grid gridTemplateColumns="repeat(2, 1fr)"
+            gap="small"
+            justifyContent="center"
+          >
+            <s-grid-item>
+              <s-text-field
+                label="Company Name"
+                name="my-text"
+          
+              />
+            </s-grid-item>
 
-          <s-card-section>
-            <s-box
-              border="divider"
-              borderRadius="base"
-              background="surface-subdued"
-              style={{ minHeight: '300px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-            >
-              <s-text tone="subdued">[Line Chart Placeholder]</s-text>
-            </s-box>
-          </s-card-section>
-
-          <s-card-section>
-            <s-grid columns={{xs: 1, sm: 2, md: 4}} gap="5">
-
-              <s-box>
-                <s-text size="small" tone="subdued">Ad Spend (7d)</s-text>
-                <s-heading element="h2">{data.adSpend.value}</s-heading>
-                <s-text size="small" tone="subdued">{data.adSpend.avg}</s-text>
-                <KpiChange change={data.adSpend.change} />
-              </s-box>
-
-              <s-box>
-                <s-text size="small" tone="subdued">Purchases (7d)</s-text>
-                <s-heading element="h2">{data.purchases.value}</s-heading>
-                <s-text size="small" tone="subdued">{data.purchases.avg}</s-text>
-                <KpiChange change={data.purchases.change} />
-              </s-box>
-
-              <s-box>
-                <s-text size="small" tone="subdued">Revenue (7d)</s-text>
-                <s-heading element="h2">{data.revenue.value}</s-heading>
-                <s-text size="small" tone="subdued">{data.revenue.avg}</s-text>
-                <KpiChange change={data.revenue.change} />
-              </s-box>
-
-              <s-box>
-                <s-text size="small" tone="subdued">Net Profit (7d)</s-text>
-                <s-heading element="h2">{data.netProfit.value}</s-heading>
-                <s-text size="small" tone="subdued">{data.netProfit.avg}</s-text>
-                <KpiChange change={data.netProfit.change} />
-              </s-box>
-
-            </s-grid>
-          </s-card-section>
-        </s-card>
-      </s-layout-block>
+            <s-grid-item>
+              <s-number-field
+                label="Tax / VAT ID"
+                name="my-text"
+          
+              />
+            </s-grid-item>
+          </s-grid>
+    
+        </s-form>
+      </s-section>
     </s-page>
   );
 }
